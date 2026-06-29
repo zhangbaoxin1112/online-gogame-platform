@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 防止移动端触摸时的高亮 */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* 按钮基础样式 */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-gray-900 text-white hover:bg-gray-800 
+           focus:ring-gray-500 active:bg-gray-950;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-200 text-gray-800 hover:bg-gray-300 
+           focus:ring-gray-400 active:bg-gray-400;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700 
+           focus:ring-red-500 active:bg-red-800;
+  }
+
+  .btn-success {
+    @apply btn bg-green-600 text-white hover:bg-green-700 
+           focus:ring-green-500 active:bg-green-800;
+  }
+
+  /* 输入框样式 */
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg
+           focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent
+           transition-all duration-200;
+  }
+
+  /* 卡片样式 */
+  .card {
+    @apply bg-white rounded-xl shadow-md p-6;
+  }
+
+  /* 移动端底部导航安全区域 */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+}
+
+/* 棋盘相关样式 */
+.go-board {
+  background: linear-gradient(135deg, #DEB887 0%, #C4A06B 100%);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* 棋子动画 */
+.stone-black, .stone-white {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.stone-black:hover, .stone-white:hover {
+  transform: scale(1.05);
+}
+
+/* 加载动画 */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* 聊天消息闪烁动画 - 闪烁3次 */
+@keyframes flash-three-times {
+  0%, 100% { opacity: 1; }
+  16.67% { opacity: 0.3; }
+  33.33% { opacity: 1; }
+  50% { opacity: 0.3; }
+  66.67% { opacity: 1; }
+  83.33% { opacity: 0.3; }
+}
+
+.chat-flash {
+  animation: flash-three-times 1.5s ease-in-out;
+}
+
+/* 响应式字体 */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
